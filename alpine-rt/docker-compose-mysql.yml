@@ -10,6 +10,6 @@ db:
 web:
   image: k0st/alpine-rt
   ports:
-   - "80:10080"
+   - "10080:80"
   links:
    - db

@@ -68,8 +68,14 @@ done
 
 if [ -f /opt/rt4/db.initialized ]; then
 	echo "[i] Database already initialized. Not touching database!"
+	if [ "$DB_ENV_MYSQL_USER" != "" ]; then
+		wait4mysql
+	fi
+	if [ "$DB_ENV_POSTGRES_USER" != "" ]; then
+		wait4psql
+	fi
 else
-	echo "[i] Database not initialized"
+	echo "[i] Database not initialized. Initializing..."
 	echo "Set(\$rtname, 'example.com');" > $RTCONF
 	echo "Set(\$DatabaseHost,   'db');" >> $RTCONF
 	echo "Set(\$DatabaseRTHost, 'localhost');" >> $RTCONF

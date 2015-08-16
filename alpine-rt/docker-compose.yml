@@ -1,0 +1,15 @@
+db:
+  image: k0st/alpine-postgres
+#  volumes: 
+#  - /data/mydb:/var/lib/postgresql/data
+  environment:
+  - POSTGRES_DB=rt
+  - POSTGRES_USER=rt
+  - POSTGRES_PASSWORD=rtpass
+
+web:
+  image: k0st/alpine-rt
+  ports:
+   - "80:10080"
+  links:
+   - db

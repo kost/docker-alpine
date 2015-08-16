@@ -1,0 +1,15 @@
+db:
+  image: k0st/alpine-mariadb
+#  volumes: 
+#  - /data/mydb:/var/lib/mysql
+  environment:
+  - MYSQL_DATABASE=rt
+  - MYSQL_USER=rt
+  - MYSQL_PASSWORD=rtpass
+
+web:
+  image: k0st/alpine-rt
+  ports:
+   - "80:10080"
+  links:
+   - db

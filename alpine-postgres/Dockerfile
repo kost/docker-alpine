@@ -15,5 +15,7 @@ ENV LANG en_US.utf8
 ENV PGDATA /var/lib/postgresql/data
 VOLUME ["/var/lib/postgresql/data"]
 
+EXPOSE 5432
+
 ENTRYPOINT ["/scripts/run.sh"]
 

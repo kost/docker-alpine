@@ -11,7 +11,9 @@ do
 done
 
 # set apache as owner/group
-chown -R apache:apache /app
+if [ "$FIX_OWNERSHIP" != "" ]; then
+	chown -R apache:apache /app
+fi
 
 # display logs
 tail -F /var/log/apache2/*log &

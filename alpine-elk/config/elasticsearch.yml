@@ -1,0 +1,17 @@
+# listen on all interfaces
+network:
+  bind_host: 0.0.0.0
+
+# default ports (http 9200, tcp 9300)
+http:
+  port: 9200
+
+transport:
+  tcp:
+    port: 9300
+
+# data and logs locations
+# FIXME: figure out best placement for logs
+path:
+  data: /var/lib
+  logs: /var/lib/elasticsearch

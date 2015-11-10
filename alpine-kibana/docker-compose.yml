@@ -1,0 +1,17 @@
+elasticsearch:
+  image: k0st/alpine-elasticsearch
+  volumes: 
+  - /home/vkosturj/docker/su/alpine-kibana/blah:/var/lib/elasticsearch
+
+kibana:
+  image: k0st/alpine-kibana
+  ports:
+   - "10080:5601"
+  links:
+   - elasticsearch
+
+logstash:
+  image: k0st/alpine-logstash
+  links:
+   - elasticsearch
+  

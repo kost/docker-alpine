@@ -10,6 +10,11 @@ do
 	fi
 done
 
+if [ ! -d "/run/mysqld" ]; then
+	mkdir -p /run/mysqld
+	chown -R mysql:mysql /run/mysqld
+fi
+
 if [ -d /var/lib/mysql/mysql ]; then
 	echo "[i] MySQL directory already present, skipping creation"
 else
@@ -27,11 +32,6 @@ else
 	MYSQL_DATABASE=${MYSQL_DATABASE:-""}
 	MYSQL_USER=${MYSQL_USER:-""}
 	MYSQL_PASSWORD=${MYSQL_PASSWORD:-""}
-
-	if [ ! -d "/run/mysqld" ]; then
-		mkdir -p /run/mysqld
-		chown -R mysql:mysql /run/mysqld
-	fi
 
 	tfile=`mktemp`
 	if [ ! -f "$tfile" ]; then

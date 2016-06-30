@@ -12,7 +12,5 @@ chmod -R 755 /scripts
 EXPOSE 3306
 # WORKDIR /app
 
-VOLUME ["/var/lib/mysql"]
-
 ENTRYPOINT ["/scripts/run.sh"]
 

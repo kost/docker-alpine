@@ -4,10 +4,10 @@ MAINTAINER kost, https://github.com/kost/docker-alpine
 # Set environment variables
 ENV KIBANA_VERSION 5.1.1
 ENV PKG_NAME kibana
-ENV PKG_PLATFORM linux-x64
+ENV PKG_PLATFORM linux-x86_64
 ENV KIBANA_PKG $PKG_NAME-$KIBANA_VERSION-$PKG_PLATFORM
 ENV KIBANA_CONFIG /opt/$PKG_NAME-$KIBANA_VERSION-$PKG_PLATFORM/config/kibana.yml
-ENV KIBANA_URL https://download.elastic.co/$PKG_NAME/$PKG_NAME/$KIBANA_PKG.tar.gz
+ENV KIBANA_URL https://artifacts.elastic.co/downloads/$PKG_NAME/$KIBANA_PKG.tar.gz
 ENV ELASTICSEARCH_HOST elasticsearch
 
 # Download Kibana

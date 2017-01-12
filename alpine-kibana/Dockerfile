@@ -10,6 +10,9 @@ ENV KIBANA_CONFIG /opt/$PKG_NAME-$KIBANA_VERSION-$PKG_PLATFORM/config/kibana.yml
 ENV KIBANA_URL https://artifacts.elastic.co/downloads/$PKG_NAME/$KIBANA_PKG.tar.gz
 ENV ELASTICSEARCH_HOST elasticsearch
 
+# add our user and group first to make sure their IDs get assigned consistently
+RUN addgroup -S kibana && adduser -S -h /home/kibana -G kibana kibana
+
 # Download Kibana
 RUN apk add --update ca-certificates wget nodejs \
     && mkdir -p /opt \
@@ -19,12 +22,11 @@ RUN apk add --update ca-certificates wget nodejs \
     && sed -i "s/localhost/$ELASTICSEARCH_HOST/" $KIBANA_CONFIG \
     && rm -rf /tmp/*.tar.gz /var/cache/apk/* /opt/$KIBANA_PKG/node/ \
     && mkdir -p /opt/$KIBANA_PKG/node/bin/ \
-    && ln -s $(which node) /opt/$PKG_NAME/node/bin/node
+    && ln -s $(which node) /opt/$PKG_NAME/node/bin/node \
+	&& chown -R kibana:kibana /opt/$PKG_NAME
 
 # Expose
 EXPOSE 5601
-
-USER nobody
 
 # Working directory
 WORKDIR ["/opt/kibana"]

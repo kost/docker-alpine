@@ -20,10 +20,11 @@ RUN apk add --update ca-certificates wget nodejs \
     && tar -xvzf /tmp/$KIBANA_PKG.tar.gz -C /opt/ \
     && ln -s /opt/$KIBANA_PKG /opt/$PKG_NAME \
     && sed -ri "s!^(\#\s*)?(elasticsearch\.url:).*!\2 'http://$ELASTICSEARCH_HOST:9200'!" $KIBANA_CONFIG \
+    && sed -ri "s!^(\#\s*)?(server\.host:).*!\2 '0.0.0.0'!" $KIBANA_CONFIG \
     && rm -rf /tmp/*.tar.gz /var/cache/apk/* /opt/$KIBANA_PKG/node/ \
     && mkdir -p /opt/$KIBANA_PKG/node/bin/ \
     && ln -s $(which node) /opt/$PKG_NAME/node/bin/node \
-	&& chown -R kibana:kibana /opt/$PKG_NAME
+    && chown -R kibana:kibana /opt/$PKG_NAME
 
 EXPOSE 5601
 

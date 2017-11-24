@@ -18,21 +18,21 @@ ENV KIBANA_URL https://download.elastic.co/$KIBANA_NAME/$KIBANA_NAME/$KIBANA_PKG
 
 
 # Download Elasticsearch
-RUN apk add --update openssl nodejs bash \
+RUN apk add --update openssl nodejs bash curl \
     && mkdir -p /opt \  
     && echo "[i] Building elasticsearch" \
     && echo -O /tmp/$ES_NAME-$ELASTICSEARCH_VERSION.tar.gz $ELASTICSEARCH_URL \
-    && wget -O /tmp/$ES_NAME-$ELASTICSEARCH_VERSION.tar.gz $ELASTICSEARCH_URL \
+    && curl -fsSL -o  /tmp/$ES_NAME-$ELASTICSEARCH_VERSION.tar.gz $ELASTICSEARCH_URL \
     && tar -xzf /tmp/$ES_NAME-$ELASTICSEARCH_VERSION.tar.gz -C /opt/ \
     && ln -s /opt/$ES_NAME-$ELASTICSEARCH_VERSION /opt/$ES_NAME \
     && mkdir /var/lib/elasticsearch \
     && echo "[i] Building logstash" \
-    && wget -O /tmp/$LOGSTASH_NAME-$LOGSTASH_VERSION.tar.gz $LOGSTASH_URL \
+    && curl -fsSL -o  /tmp/$LOGSTASH_NAME-$LOGSTASH_VERSION.tar.gz $LOGSTASH_URL \
     && tar xzf /tmp/$LOGSTASH_NAME-$LOGSTASH_VERSION.tar.gz -C /opt/ \
     && ln -s /opt/$LOGSTASH_NAME-$LOGSTASH_VERSION /opt/$LOGSTASH_NAME \
     && mkdir /etc/$LOGSTASH_NAME \
     && echo "[i] Building kibana" \
-    && wget -O /tmp/$KIBANA_PKG.tar.gz $KIBANA_URL \
+    && curl -fsSL -o  /tmp/$KIBANA_PKG.tar.gz $KIBANA_URL \
     && tar -xzf /tmp/$KIBANA_PKG.tar.gz -C /opt/ \
     && ln -s /opt/$KIBANA_PKG /opt/$KIBANA_NAME \
     && rm -rf /opt/$KIBANA_PKG/node/ \

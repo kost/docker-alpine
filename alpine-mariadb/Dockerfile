@@ -1,4 +1,4 @@
-FROM gliderlabs/alpine
+FROM alpine:3.6
 MAINTAINER kost - https://github.com/kost
 
 RUN apk --update add mysql mysql-client pwgen && rm -f /var/cache/apk/* && \
